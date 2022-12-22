@@ -30,11 +30,11 @@ class experiment():
             os.mkdir(self.expr_dir)
         # Identify version of the run/experiment
         self.expr_versions_ls = self.get_current_version(self.expr_dir,add_new_version = True)
+        self.expr_v_dir = os.path.join(self.expr_dir,self.expr_versions_ls[-1])
         
         # Make version directory for results and log
         if self.overwrite_existing and len(self.expr_versions_ls)>1:
             self.expr_versions_ls.pop()
-            self.expr_v_dir = os.path.join(self.expr_dir,self.expr_versions_ls[-1])
         else:
             os.mkdir(self.expr_v_dir)
         self._initiate_log()
