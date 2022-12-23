@@ -35,6 +35,7 @@ class experiment():
         # Make version directory for results and log
         if self.overwrite_existing and len(self.expr_versions_ls)>1:
             self.expr_versions_ls.pop()
+            self.expr_v_dir = os.path.join(self.expr_dir,self.expr_versions_ls[-1])
         else:
             os.mkdir(self.expr_v_dir)
         self._initiate_log()
@@ -103,7 +104,7 @@ class experiment():
             except:
                 raise Exception('No such file or directory exists. Please make sure the data is either in csv or xlsx format.')
         
-        print('Data read successfully, data name: %s, verion: %s.' %(file_name_with_v, version))
+        print('Data read successfully, data name: %s, version: %s.' %(file_name_with_v, version))
         return data
     
     def read_logged_file(self,file_name, version = 'latest', sheet_name = 0):
