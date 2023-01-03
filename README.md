@@ -34,7 +34,7 @@ First, get the name of the notebook you're working with by running:
 ```
 curr_notebook =  re.search('(.+).ipynb',os.path.basename(globals()['__vsc_ipynb_file__']))[1]
 ```
-Alternatively, you can directly use the name of the file you're working with.
+Alternatively, you can directly use the name of the file you're working with as a string: "test.ipynb".
 
 Next, use experiment class to define a new class for your experiment (run) by:
 ```
