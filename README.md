@@ -3,15 +3,17 @@ Experiment versioning
 
 To use the package, project should be organized into a combination of local files (which includes outputs and data and data dictionary) and code (which is your cloned git repo for the project).
 
-Here is an example:
+### An example top-level directory layout
 
-.
-├── project xyz
-├── Data                    # data for the project
-├── xyz                     # Cloned git repo for the project codes
-│   ├── cleaning            # Cleaning step
-│   ├── model_evaluation    # Model evaluation
-│   ├── Tuning              # Tuning step
-│   └── ...
-├── Dictionary              # data dictionary for the project data
-└── Results                 # Results folder for the outputs of experiments
+    .
+    ├── project xyz               # Porject directory in your local system
+      ├── Data                    # Data for the project, includes all data files
+      ├── xyz                     # Cloned git repo for the project codes, includes all the code
+        ├── cleaning              # Cleaning step
+        ├── model_evaluation      # Model evaluation
+        ├── Tuning                # Tuning step
+        └── ...
+      ├── Dicionary               # data dictionary for the project data
+      ├── Results                 # Results folder for the outputs of experiments, results of each run will be stored here.
+      └── README.md
+
