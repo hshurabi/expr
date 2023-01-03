@@ -65,5 +65,5 @@ You don't need to specify the format of the file. The method will read the lates
 ### Read logged files
 To read a logged file, you can use read_logged_file method. It will read the latest version of the file, unless otherwise specified. If the files is and Excel file, you can specify sheet_name as well.
 ```
-expr.read_logged_file('test_csv.csv', version = 'latest', sheet_name = 0)
+expr.read_logged_file('test_result', version = 'latest', sheet_name = 0)
 ```
