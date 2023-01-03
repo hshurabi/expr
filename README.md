@@ -42,7 +42,9 @@ expr = experiments.experiment(curr_notebook, overwrite_existing=False)
 ```
 
 To log a message, use:
+```
 expr.log("This is a logged message.")
+````
 
 To wirte a file (image, excel, etc.) you'll need to log the file first by using log_file function:
 ```
