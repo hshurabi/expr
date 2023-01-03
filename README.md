@@ -58,6 +58,6 @@ writer = pd.ExcelWriter(FileName_excel)
 ### Read data or file
 To read data you can use read_data method of the experiment class:
 ```
-expr.read_data('BMT_HR_dict')
+expr.read_data('my_data')
 ```
 You don't need to specify the format of the file. The method will read the latest version of the data unless specified otherwise. Currently this method supports csv and xlsx formats and it uses pandas read_csv and read_excel functions to read these two types of data.
