@@ -55,9 +55,15 @@ Then, you can use the FileName_excel variable in the ExcelWriter:
 writer = pd.ExcelWriter(FileName_excel)
 ```
 
-### Read data or file
+### Read data
 To read data you can use read_data method of the experiment class:
 ```
 expr.read_data('my_data')
 ```
 You don't need to specify the format of the file. The method will read the latest version of the data unless specified otherwise. Currently this method supports csv and xlsx formats and it uses pandas read_csv and read_excel functions to read these two types of data.
+
+### Read logged files
+To read a logged file, you can use read_logged_file method. It will read the latest version of the file, unless otherwise specified. If the files is and Excel file, you can specify sheet_name as well.
+```
+expr.read_logged_file('test_csv.csv', version = 'latest', sheet_name = 0)
+```
