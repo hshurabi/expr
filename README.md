@@ -1,6 +1,16 @@
 # expr
-Experiment versioning
+Experiment versioning: versioning the results of runs. Once an experiment class is defined, a folder with the name of the notebook (or code you're working with) will be created in the Results folder. Then, subsequent version folders will be created each time you run the code. Here is an example for test.ipynb experiment:
 
+    .
+    ├── Results
+      ├── test                         # This folder will be created to store the results of each run for the test.ipynb.
+        ├── v1                         # This folder will be created to store the results of first run of test.ipynb file.
+            ├── output.log             # This file will be created to store the logged information of the test.ipynb file. 
+            ├── test_image_v1.png      # This is a logged png file created by log_file method of the experiment class (example below).
+            ├── test_result_v1.csv     # This is a logged csv file created by log_file method of the experiment class (example below).
+            ├── test_image_v2.png      # This is version 2 (second run) of the same test_image file. 
+            └── ...
+        
 To use the package, project should be organized into a combination of local files (which includes outputs and data and data dictionary) and code (which is your cloned git repo for the project).
 
 ### An example top-level directory layout
