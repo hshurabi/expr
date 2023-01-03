@@ -10,6 +10,7 @@ Experiment versioning: versioning the results of runs. Once an experiment class 
             ├── test_result_v1.csv     # This is a logged csv file created by log_file method of the experiment class (example below).
             ├── test_image_v2.png      # This is version 2 (second run) of the same test_image file. 
             └── ...
+Note that if you run a cell multiple times which includes a logged file (csv, png, etc.), the experiment version will stay the same, but the file version will be changed unless you specify overwrite_existing input as True.
         
 To use the package, project should be organized into a combination of local files (which includes outputs and data and data dictionary) and code (which is your cloned git repo for the project).
 
@@ -51,3 +52,10 @@ Then, you can use the FileName_excel variable in the ExcelWriter:
 ```
 writer = pd.ExcelWriter(FileName_excel)
 ```
+
+### Read data or file
+To read data you can use read_data method of the experiment class:
+```
+expr.read_data('BMT_HR_dict')
+```
+You don't need to specify the format of the file. The method will read the latest version of the data unless specified otherwise. Currently this method supports csv and xlsx formats and it uses pandas read_csv and read_excel functions to read these two types of data.
