@@ -151,10 +151,12 @@ class experiment():
         # Save code to the results directory
         try:
             shutil.copy(os.path.join(self.code_dir,self.experiment_name)+'.py', 
-                        os.path.join(self.results_dir,self.experiment_name)+'.py')
+                        os.path.join(self.results_dir,self.experiment_name)+
+                            self.expr_versions_ls[-1]+'.py')
         except:
             shutil.copy(os.path.join(self.code_dir,self.experiment_name)+'.ipynb',
-                        os.path.join(self.results_dir,self.experiment_name)+'.ipynb' )
+                        os.path.join(self.results_dir,self.experiment_name)+
+                            self.expr_versions_ls[-1]+'.ipynb' )
         # Clear stdout
         sys.stdout = self._old_stdout
         self.log_file_name.close()
