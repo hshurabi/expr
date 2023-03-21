@@ -2,6 +2,7 @@ import os
 import re
 import sys
 import pandas as pd
+import shutil
 
 # Experiment class to read data, write data/results with versioning
 class experiment():
@@ -147,5 +148,13 @@ class experiment():
         return re.sub(pattern,curr_v ,file_name_full_with_extension)
 
     def close_expr(self):
+        # Save code to the results directory
+        try:
+            shutil.copy(os.path.join(self.code_dir,self.experiment_name,'.py'), 
+                        os.path.join(self.results_dir,self.experiment_name,'.py'))
+        except:
+            shutil.copy(os.path.join(self.code_dir,self.experiment_name,'.ipynb'),
+                        os.path.join(self.results_dir,self.experiment_name,'.ipynb') )
+        # Clear stdout
         sys.stdout = self._old_stdout
         self.log_file_name.close()
