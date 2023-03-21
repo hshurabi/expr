@@ -150,11 +150,11 @@ class experiment():
     def close_expr(self):
         # Save code to the results directory
         try:
-            shutil.copy(os.path.join(self.code_dir,self.experiment_name,'.py'), 
-                        os.path.join(self.results_dir,self.experiment_name,'.py'))
+            shutil.copy(os.path.join(self.code_dir,self.experiment_name)+'.py', 
+                        os.path.join(self.results_dir,self.experiment_name)+'.py')
         except:
-            shutil.copy(os.path.join(self.code_dir,self.experiment_name,'.ipynb'),
-                        os.path.join(self.results_dir,self.experiment_name,'.ipynb') )
+            shutil.copy(os.path.join(self.code_dir,self.experiment_name)+'.ipynb',
+                        os.path.join(self.results_dir,self.experiment_name)+'.ipynb' )
         # Clear stdout
         sys.stdout = self._old_stdout
         self.log_file_name.close()
