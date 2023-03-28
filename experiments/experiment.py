@@ -142,7 +142,15 @@ class experiment():
         # Make log file
         self.log_file_name = open(os.path.join(self.expr_v_dir, self.log_file_name + '.log'),'w')
         sys.stdout = self.log_file_name
+
+    def show(self,to_be_printed):
+        self.stdout = self._old_stdout
+        print(to_be_printed)
+        sys.stdout = self.log_file_name
     
+    def print(self,to_be_printed):
+        self.show(self,to_be_printed)
+
     def _replace_version(self,file_name_full_with_extension, curr_v):
         pattern = 'v\d+' +'(?!.*v\d+)'
         return re.sub(pattern,curr_v ,file_name_full_with_extension)
