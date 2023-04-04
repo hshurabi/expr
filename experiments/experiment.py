@@ -175,11 +175,19 @@ class experiment():
         sys.stdout = self._old_stdout
         self.log_file_name.close()
 
-    def load_model(self, expr_name = None, file_name = None):
+    def load_model(self, expr_name = None, file_name = None, version = 'latest'):
         expr_path = os.path.join(self.results_dir, expr_name)
         expr_path_v = os.path.join(expr_path, self.get_current_version(expr_path)[-1])
         if '.pkl' not in file_name:
             file_name = file_name + '.pkl'
-        file_path = os.path.join(expr_path_v, file_name)
+        file_versions = self.get_current_version(expr_path_v, file_name)
+        if version == 'latest':
+            file_name_with_v = file_versions[-1]
+        else:
+            if isinstance(version,int):
+                version = 'v' + str(version)
+            file_name_with_v = self._replace_version(file_versions[0], version.lower())
+        
+        file_path = os.path.join(expr_path_v, file_name_with_v)
         return joblib.load(file_path)
 
