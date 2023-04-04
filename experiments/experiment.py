@@ -3,6 +3,7 @@ import re
 import sys
 import pandas as pd
 import shutil
+import joblib
 
 # Experiment class to read data, write data/results with versioning
 class experiment():
@@ -74,7 +75,6 @@ class experiment():
                 list_of_versions.append(curr_v)
                 if file_name is not None:
                     list_of_versions[-1] = self._replace_version(list_of_versions[0],curr_v)
-
 
         list_of_versions.sort() 
         return list_of_versions
@@ -174,3 +174,12 @@ class experiment():
         # Clear stdout
         sys.stdout = self._old_stdout
         self.log_file_name.close()
+
+    def load_model(self, expr_name = None, file_name = None):
+        expr_path = os.path.join(self.results_dir, expr_name)
+        expr_path_v = os.path.join(expr_path, self.get_current_version(expr_path)[-1])
+        if '.pkl' not in file_name:
+            file_name = file_name + '.pkl'
+        file_path = os.path.join(expr_path_v, file_name)
+        return joblib.load(file_path)
+
