@@ -144,9 +144,9 @@ class experiment():
         sys.stdout = self.log_file_name
 
     def show(self,to_be_printed):
-        self.stdout = self._old_stdout
+        sys.stdout = self._old_stdout
         print(to_be_printed)
-        sys.stdout = self.log_file_name
+        # sys.stdout = self.log_file_name
     
     def print(self,to_be_printed):
         self.show(self,to_be_printed)
