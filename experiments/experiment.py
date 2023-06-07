@@ -4,6 +4,7 @@ import sys
 import pandas as pd
 import shutil
 import joblib
+import pyreadstat
 
 # Experiment class to read data, write data/results with versioning
 class experiment():
@@ -79,19 +80,31 @@ class experiment():
         list_of_versions.sort() 
         return list_of_versions
 
-    def read_data(self,file_name, version = 'latest'):
+    def read_data(self, file_name, version = 'latest', dir = 'data' ):
         # Specify data directory
         file_name = file_name.lower()
-        if 'dict' in file_name:
+        if dir == 'data':
+            file_path = self.data_dir
+        elif dir == 'dict':
             file_path = self.dict_dir
         else:
-            file_path = self.data_dir
-        
-        data_versions = self.get_current_version(file_path, file_name)
-        
-        if version == 'latest':
+            if version == 'latest':
+                dir_version = self.get_current_version(os.path.join(self.results_dir,dir))[-1]
+            else:
+                if isinstance(dir_version,int): 
+                    dir_version = 'V' + str(version) 
+                else: 
+                    dir_version = version
+            file_path = os.path.join(os.path.join(self.results_dir,dir), dir_version)
+
+
+        if version == 'raw':
+            file_name_with_v = file_name
+        elif version == 'latest':
+            data_versions = self.get_current_version(file_path, file_name)
             file_name_with_v = data_versions[-1]
         else:
+            data_versions = self.get_current_version(file_path, file_name)
             if isinstance(version,int):
                 version = 'v' + str(version)
             file_name_with_v = self._replace_version(data_versions[0], version.lower())
@@ -103,7 +116,10 @@ class experiment():
             try:
                 data = pd.read_csv(os.path.join(file_path,file_name_with_v))
             except:
-                raise Exception('No such file or directory exists. Please make sure the data is either in csv or xlsx format.')
+                try:
+                    data, _ = pyreadstat.read_sas7bdat(os.path.join(file_path,file_name_with_v))
+                except:
+                    raise Exception('No such file or directory exists. Please make sure the data is either in csv, xlsx, or sas7bdat format.')
         
         print('Data read successfully, data name: %s, version: %s.' %(file_name_with_v, version))
         return data
